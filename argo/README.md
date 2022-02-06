@@ -1,3 +1,32 @@
+# My notes
+
+Activate Docker Desktop kubernetes
+
+Install Argo CD:
+
+``` shell
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.2.5/manifests/install.yaml
+```
+
+get initial secret for initial admin user:
+
+``` shell
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}"
+echo -n '<binary-string>' | base64 --decode; echo
+```
+
+initiative interactive port-forwarding:
+
+``` shell
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+access argo UI via <https://localhost:8080>
+
+access deploy app via <http://localhost:30000>
+
 # Argo CD Demonstration
 This directory contains the example materials used in the Argo CD demonstration that is part of the LinkedIn Learning course `GitOps Foundations`. The full course is available from [LinkedIn Learning][lil-course-url].
 
